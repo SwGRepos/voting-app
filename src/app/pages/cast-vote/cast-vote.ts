@@ -28,7 +28,7 @@ export class CastVote implements OnInit {
   }
 
   castVote() {
-    debugger;
+  
     if (this.selectedCandidateId > 0 && this.selectedVoterId > 0) {
 
       let selectedCandidate$ = this.candidates$.pipe(
@@ -43,7 +43,6 @@ export class CastVote implements OnInit {
       console.log(selectedvoter$)
       combineLatest([selectedCandidate$, selectedvoter$]).subscribe(
         ([candid, votr]) => {
-          debugger
           if (candid && votr) {
             const vote = {
               voterId: this.selectedVoterId,
