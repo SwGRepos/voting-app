@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">CastVote</h5>
+    </div>
+    <div class="card-body">
+        <section>
+            <div class="row">
+                <div class="col-md-2"><label>Voter :</label> </div>
+                <div class="col-md-3">
+                    <select [(ngModel)]="selectedVoterId" name="voterSelect" class="form-control" #nameVote="ngModel">
+                        <option [ngValue]="0">--Select--</option>
+                        <option *ngFor="let v of voters$ | async" [value]="v.id" [disabled]="v.hasVoted">
+                            {{ v.name }} - {{ v.hasVoted ? 'Already Voted' : 'Eligible' }}</option>
+                    </select>
+                </div>
+                <div class="col-md-2"><label>Candidate :</label> </div>
+                <div class="col-md-3"> <select [(ngModel)]="selectedCandidateId" name="candidateSelect"
+                        #nameCandidat="ngModel" class="form-control">
+                        <option [ngValue]="0">--Select--</option>
+                        <option *ngFor="let c of candidates$ | async" [value]="c.id">{{ c.name }}</option>
+                    </select></div>
+                <div class="col-md-2"> <button (click)="castVote()" [disabled]="!(nameCandidat.value && nameVote.value)"
+                        class="btn btn-primary">Vote</button></div>
+            </div>
+        </section>
+
+    </div>
+</div>

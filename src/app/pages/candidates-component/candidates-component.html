@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="card-header" id="collapsetwo">
+        <h5 class="mb-0">
+            Candidates
+        </h5>
+    </div>
+
+    <div id="collapsetwo" class="collapse show" aria-labelledby="headingtwo" data-parent="#accordion1">
+        <div class="card-body">
+            <form (ngSubmit)="addCandidate()" #candidateForm="ngForm">
+                <div class="row">
+                    <div class="col-md-2"> <label> Name :</label> </div>
+                    <div class="col-md-6">
+                        <input type="text" [(ngModel)]="newCandidate.name" name="name" required minlength="4"
+                            maxlength="25" #name="ngModel" class="form-control" />
+                    </div>
+                    <div class="col-md-2"> <button [disabled]="candidateForm.invalid"
+                            class="btn btn-success">Add</button></div>
+                </div>
+                <div *ngIf="name.invalid && name.dirty" class="text-danger">
+                    <div *ngIf="name.errors?.['required']">Name is required.</div>
+                    <div *ngIf="name.errors?.['minlength']">Name must be at least 4 characters long.</div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<hr>
+<div class="card">
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <th>Candidate Name</th>
+                <th>Votes Recieved</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of candidates$ | async">
+                    <td>{{ c.name }}</td>
+                    <td>{{ c.votes }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
